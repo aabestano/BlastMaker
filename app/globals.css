@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Theme tokens. Tailwind's slate scale and the 200-400 accent shades are mapped to CSS variables,
+ * so every existing utility (bg-slate-950, border-slate-800, text-blue-400 ...) re-themes automatically.
+ *
+ * Dark  : slate-950 #020617 canvas, slate-800 borders.
+ * Light : ideate_content_pipeline_v4 palette. Canvas #F8FAFC, borders #E2E8F0,
+ *         sidebar deep navy #0F172A with #1E293B hover states (see .sidebar-scope).
+ */
+:root,
+.dark {
+  color-scheme: dark;
+  --slate-50: 248 250 252;
+  --slate-100: 241 245 249;
+  --slate-200: 226 232 240;
+  --slate-300: 203 213 225;
+  --slate-400: 148 163 184;
+  --slate-500: 100 116 139;
+  --slate-600: 71 85 105;
+  --slate-700: 51 65 85;
+  --slate-800: 30 41 59;
+  --slate-900: 15 23 42;
+  --slate-950: 2 6 23;
+  --blue-200: 191 219 254;
+  --blue-300: 147 197 253;
+  --blue-400: 96 165 250;
+  --emerald-200: 167 243 208;
+  --emerald-300: 110 231 183;
+  --emerald-400: 52 211 153;
+  --red-200: 254 202 202;
+  --red-300: 252 165 165;
+  --red-400: 248 113 113;
+  --amber-200: 253 230 138;
+  --amber-300: 252 211 77;
+  --amber-400: 251 191 36;
+  --indigo-200: 199 210 254;
+  --indigo-300: 165 180 252;
+  --indigo-400: 129 140 248;
+}
+
+.light {
+  color-scheme: light;
+  --slate-50: 2 6 23;
+  --slate-100: 15 23 42;
+  --slate-200: 30 41 59;
+  --slate-300: 51 65 85;
+  --slate-400: 71 85 105;
+  --slate-500: 100 116 139;
+  --slate-600: 148 163 184;
+  --slate-700: 203 213 225;
+  --slate-800: 226 232 240;
+  --slate-900: 255 255 255;
+  --slate-950: 248 250 252;
+  --blue-200: 30 64 175;
+  --blue-300: 29 78 216;
+  --blue-400: 37 99 235;
+  --emerald-200: 6 95 70;
+  --emerald-300: 4 120 87;
+  --emerald-400: 5 150 105;
+  --red-200: 153 27 27;
+  --red-300: 185 28 28;
+  --red-400: 220 38 38;
+  --amber-200: 146 64 14;
+  --amber-300: 180 83 9;
+  --amber-400: 217 119 6;
+  --indigo-200: 55 48 163;
+  --indigo-300: 67 56 202;
+  --indigo-400: 79 70 229;
+}
+
+/* The sidebar stays deep navy in light mode: re-scope the dark tokens inside it. */
+.light .sidebar-scope {
+  color-scheme: dark;
+  --slate-50: 248 250 252;
+  --slate-100: 241 245 249;
+  --slate-200: 226 232 240;
+  --slate-300: 203 213 225;
+  --slate-400: 148 163 184;
+  --slate-500: 100 116 139;
+  --slate-600: 71 85 105;
+  --slate-700: 71 85 105;
+  --slate-800: 51 65 85;
+  --slate-900: 30 41 59; /* #1E293B hover / raised surface */
+  --slate-950: 15 23 42; /* #0F172A deep navy */
+  --blue-300: 147 197 253;
+  --blue-400: 96 165 250;
+  --emerald-300: 110 231 183;
+  --emerald-400: 52 211 153;
+  --amber-300: 252 211 77;
+  --amber-400: 251 191 36;
+  color: rgb(226 232 240);
+}
+
+html,
+body {
+  height: 100%;
+  background: rgb(var(--slate-950));
+  color: rgb(var(--slate-200));
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--slate-700)) transparent;
+}
+
+@layer components {
+  .input {
+    @apply w-full rounded-md border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-600 outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 disabled:opacity-50;
+  }
+  .label {
+    @apply mb-1.5 block text-xs font-medium uppercase tracking-wide text-slate-400;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn border-blue-500 bg-blue-600 text-white hover:bg-blue-500;
+  }
+  .btn-success {
+    @apply btn border-emerald-500 bg-emerald-600 text-white hover:bg-emerald-500;
+  }
+  .btn-ghost {
+    @apply btn border-slate-800 bg-slate-900 text-slate-200 hover:border-slate-700 hover:bg-slate-800;
+  }
+  .btn-danger {
+    @apply btn border-red-300 bg-red-50 text-red-700 hover:bg-red-100 dark:border-red-900 dark:bg-red-950/60 dark:text-red-300 dark:hover:bg-red-900/60;
+  }
+  .card {
+    @apply rounded-lg border border-slate-800 bg-slate-900/60;
+  }
+  .alert-error {
+    @apply rounded-md border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-700 dark:border-red-900 dark:bg-red-950/50 dark:text-red-300;
+  }
+}
